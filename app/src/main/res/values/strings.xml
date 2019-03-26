@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ExpenseApp</string>
+    <string name="currentExp">Current Expenses:</string>
+    <string name="defaultText">There is no expense to show, Please add your expenses from the menu.</string>
+    <string name="addExpense">Add Expense</string>
+    <string name="expName">Expense Name</string>
+    <string name="category">Category</string>
+    <string name="amount">Amount</string>
+    <string name="hint1">expense name</string>
+    <string name="hint2">amount</string>
+    <string name="addExp">Add Expense</string>
+    <string name="cancel">Cancel</string>
+    <string name="expenseDetail">Expense Detail</string>
+    <string name="Name">Name</string>
+    <string name="Category">Category</string>
+    <string name="Amount">Amount</string>
+    <string name="Date">Date</string>
+    <string name="editExpense">Edit Expense</string>
+    <string name="close">Close</string>
+</resources>
