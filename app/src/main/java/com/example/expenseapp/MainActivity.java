@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Expense> adapter;
     Expense myexpense;
     TextView defaultTextview;
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference mRootRef = database.getReference().child("expenses");
+        final DatabaseReference mRootRef = database.getReference().child("expenses");
         if (adapter != null)
             adapter.notifyDataSetChanged();
         listView = findViewById(R.id.listView);
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
         defaultTextview = findViewById(R.id.placeHolderText);
         mRootRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 expensesList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     myexpense = ds.getValue(Expense.class);
                     expensesList.add(myexpense);
+
                 }
+                key = dataSnapshot.getKey();
                 if (!(expensesList.isEmpty())){
                     defaultTextview.setVisibility(View.INVISIBLE);
 
@@ -76,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                mRootRef.child("expenses").child(key).removeValue();
+
+                return true;
+            }
+        });
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,5 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }

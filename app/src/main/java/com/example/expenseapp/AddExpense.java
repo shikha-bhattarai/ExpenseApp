@@ -61,7 +61,7 @@ public class AddExpense extends MainActivity {
                 expense = new Expense();
                 ed_text = editTextName.getText().toString().trim();
                 ed_amount = editTextAmount.getText().toString().trim();
-                if (!(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null))
+                if (!(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null || ed_amount.isEmpty() || ed_amount.length() == 0 || ed_amount.equals("") || ed_amount == null))
                 {
                     expense.setExpenseAmount(Integer.parseInt(editTextAmount.getText().toString()));
                     expense.setExpensesname(editTextName.getText().toString());
@@ -101,10 +101,7 @@ public class AddExpense extends MainActivity {
             Expense expobj = new Expense();
             expobj = (Expense) getIntent().getExtras().getSerializable("key");
             editTextName.setText(expobj.getExpensesname());
-            //categorySpinner.setText(expobj.getExpensesname());
-            addnewExpense.setText(""+expobj.getExpenseAmount());
-
-            //expense.setExpensesname(editTextName.getText().toString());
+            editTextAmount.setText(" "+expobj.getExpenseAmount());
             flag =true;
             editkey = expobj.getKey();
 
