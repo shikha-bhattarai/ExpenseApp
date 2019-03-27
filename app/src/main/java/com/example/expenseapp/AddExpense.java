@@ -42,8 +42,7 @@ public class AddExpense extends MainActivity {
         addnewExpense = (Button) findViewById(R.id.buttonAdd);
         cancelBtn = (Button) findViewById(R.id.buttonCancel);
         categorySpinner = (Spinner) findViewById(R.id.spinner);
-        ed_text = editTextName.getText().toString().trim();
-        ed_amount = editTextAmount.getText().toString().trim();
+
 
         String[] arraySpinner = new String[] {
                 "Groceries", "Invoice", "Transportation", "Shopping", "Rent", "Trips", "Utilities","Other"
@@ -60,7 +59,9 @@ public class AddExpense extends MainActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference mRootRef = database.getReference("expenses");
                 expense = new Expense();
-                if (!((ed_text.isEmpty()) || (ed_text.length() == 0) || (ed_text.equals("")) || (ed_text == null) || (ed_amount.isEmpty()) || (ed_amount.length() == 0) || (ed_text.equals("")) || (ed_amount == null)))
+                ed_text = editTextName.getText().toString().trim();
+                ed_amount = editTextAmount.getText().toString().trim();
+                if (!(ed_text.isEmpty() || ed_text.length() == 0 || ed_text.equals("") || ed_text == null))
                 {
                     expense.setExpenseAmount(Integer.parseInt(editTextAmount.getText().toString()));
                     expense.setExpensesname(editTextName.getText().toString());
@@ -69,8 +70,6 @@ public class AddExpense extends MainActivity {
                     SimpleDateFormat mdformat = new SimpleDateFormat("yyyy/MM/dd ");
                     String strDate = mdformat.format(calendar.getTime());
                     expense.setDate(strDate);
-
-
                 if (flag == true) {
                     expense.setKey(editkey);
                     mRootRef.child(editkey).setValue(expense);

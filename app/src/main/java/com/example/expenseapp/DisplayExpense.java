@@ -22,6 +22,7 @@ public class DisplayExpense extends  MainActivity {
     TextView textViewDate;
     Expense expense;
     Button editExpenseBtn;
+    Button cancelBtn;
     String key;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,6 @@ public class DisplayExpense extends  MainActivity {
         setContentView(R.layout.display_expense);
         expense = new Expense();
         expense = (Expense) getIntent().getExtras().getSerializable("bundle");
-
-
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference mRootRef = database.getReference().child("expenses");
         if (adapter != null)
@@ -68,6 +67,14 @@ public class DisplayExpense extends  MainActivity {
                 Intent i = new Intent(DisplayExpense.this, AddExpense.class);
                 i.putExtra("key",expense );
                 startActivity(i);
+            }
+        });
+
+        cancelBtn = findViewById(R.id.cancelBtn);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
